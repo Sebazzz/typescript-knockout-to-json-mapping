@@ -34,6 +34,28 @@ module QuestionEditor {
             this.isLoading(false);
         }
 
+        public deleteQuestion(question: Question) {
+            this.questions.remove(question);
+        }
+
+        public changeOrder(vm: Question, offset: number) {
+            let idx = this.questions.indexOf(vm), arr = this.questions.peek();
+            if (idx === -1 || idx === 0 && offset < 0) {
+                return;
+            }
+
+            if (idx === arr.length - 1 && offset > 0) {
+                return;
+            }
+
+            let tmp = arr[idx + offset];
+            let tmpOrder = tmp.order.peek();
+
+            tmp.order(vm.order.peek());
+            vm.order(tmpOrder);
+
+            this.questions.sort((x: Question, y: Question) => x.order() - y.order());
+        }
     }
 
     QuestionEditor.initialize();

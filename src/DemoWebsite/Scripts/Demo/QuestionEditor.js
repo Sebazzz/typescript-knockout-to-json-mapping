@@ -24,6 +24,23 @@ var QuestionEditor;
             this.questions(questions);
             this.isLoading(false);
         };
+        QuestionEditor.prototype.deleteQuestion = function (question) {
+            this.questions.remove(question);
+        };
+        QuestionEditor.prototype.changeOrder = function (vm, offset) {
+            var idx = this.questions.indexOf(vm), arr = this.questions.peek();
+            if (idx === -1 || idx === 0 && offset < 0) {
+                return;
+            }
+            if (idx === arr.length - 1 && offset > 0) {
+                return;
+            }
+            var tmp = arr[idx + offset];
+            var tmpOrder = tmp.order.peek();
+            tmp.order(vm.order.peek());
+            vm.order(tmpOrder);
+            this.questions.sort(function (x, y) { return x.order() - y.order(); });
+        };
         return QuestionEditor;
     }());
     QuestionEditor_1.QuestionEditor = QuestionEditor;

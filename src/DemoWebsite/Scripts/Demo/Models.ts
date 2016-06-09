@@ -39,6 +39,14 @@ module QuestionEditor {
         @JsonProperty({ clazz: Answer })
         public answers = ko.observableArray<Answer>();
 
+        constructor() {
+            // bind "this"
+            this.changeOrderCallback = this.changeOrderCallback.bind(this);
+        }
+
+        public changeOrderCallback(parent: QuestionEditor, offset: number) {
+            return () => parent.changeOrder(this, offset);
+        }
 
         public changeOrder(vm: Answer, offset: number) {
             let idx = this.answers.indexOf(vm), arr = this.answers.peek();

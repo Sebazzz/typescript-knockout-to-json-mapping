@@ -44,6 +44,10 @@ var QuestionEditor;
             this.order = ko.observable(0);
             this.answers = ko.observableArray();
         }
+        Question.prototype.changeOrderCallback = function (parent, offset) {
+            var _this = this;
+            return function () { return parent.changeOrder(_this, offset); };
+        };
         Question.prototype.changeOrder = function (vm, offset) {
             var idx = this.answers.indexOf(vm), arr = this.answers.peek();
             if (idx === -1 || idx === 0 && offset < 0) {

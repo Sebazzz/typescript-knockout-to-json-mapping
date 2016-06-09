@@ -2,26 +2,42 @@
     ViewBag.Title = "Home Page";
 }
 
+<h1>Question Editor</h1>
+
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id libero lectus. Sed volutpat, felis non convallis rutrum, nibh sapien cursus dui, vitae dictum urna ante et lacus. Cras vehicula enim in risus sodales, vel tempus odio sollicitudin. Vivamus et ex placerat, eleifend tellus eu, pellentesque mauris. Maecenas ut libero eu nisi commodo euismod quis vel tellus. Sed vitae magna vel magna maximus convallis in id justo. Sed dapibus diam dapibus risus mollis, et semper nisl feugiat. 
+</p>
+
 <div id="ko-root">
     <div data-bind="visible: isLoading">Loading data...</div>
 
     <div data-bind="ifnot: isLoading">
         <div data-bind="foreach: questions" class="col-sm-12">
+            <h2 data-bind="text: 'Question #' + $index()"></h2>
             <p>
-                <textarea data-bind="textInput: text"></textarea>
+                Question text:
+                <textarea class="form-control" data-bind="textInput: text"></textarea>
             </p>
 
             <ul data-bind="foreach: answers, visible: type() == QuestionEditor.QuestionType.MultipleChoice">
-                <li>
-                    <button type="button" data-bind="click: changeOrderCallback($parent, -1), enable: $index() > 0"><span class="glyphicon glyphicon-arrow-up"></span></button>
-                    <button type="button" data-bind="click: changeOrderCallback($parent, 1), enable: $index() < $parent.answers().length - 1"><span class="glyphicon glyphicon-arrow-down"></span></button>
-                    |
-                    <input type="checkbox" /> <input type="text" data-bind="textInput: text" />
+                <li style="list-style: none;">
+                    <button type="button" class="btn btn-default" data-bind="click: changeOrderCallback($parent, -1), enable: $index() > 0"><span class="glyphicon glyphicon-arrow-up"></span></button>
+                    <button type="button" class="btn btn-default" data-bind="click: changeOrderCallback($parent, 1), enable: $index() < $parent.answers().length - 1"><span class="glyphicon glyphicon-arrow-down"></span></button>
+
+                    <span style="margin-left: 2em"><input type="checkbox" /> <input type="text" data-bind="textInput: text" />
+                    </span>
                 </li>
             </ul>
 
             <p data-bind="visible: type() == QuestionEditor.QuestionType.Text">
-                <textarea data-bind="enable: false">Enter your answer here</textarea>
+                <textarea class="form-control" data-bind="enable: false" placeholder="Enter your answer here"></textarea>
+            </p>
+
+            <p>
+                <button type="button" class="btn btn-default" data-bind="click: changeOrderCallback($parent, -1), enable: $index() > 0"><span class="glyphicon glyphicon-arrow-up"></span></button>
+                <button type="button" class="btn btn-default" data-bind="click: changeOrderCallback($parent, 1), enable: $index() < $parent.questions().length - 1"><span class="glyphicon glyphicon-arrow-down"></span></button>
+
+                <button type="button" data-bind="click: $parent.deleteQuestion" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete question</button>
             </p>
         </div>
     </div>
