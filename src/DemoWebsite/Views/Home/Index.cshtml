@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="ko-root">
+    <div data-bind="visible: isLoading">Loading data...</div>
+
+    <div data-bind="ifnot: isLoading">
+        <div data-bind="foreach: questions" class="col-sm-12">
+            <p>
+                <textarea data-bind="textInput: text"></textarea>
+            </p>
+
+            <ul data-bind="foreach: answers, visible: type() == QuestionEditor.QuestionType.MultipleChoice">
+                <li>
+                    <button type="button" data-bind="click: changeOrderCallback($parent, -1), enable: $index() > 0"><span class="glyphicon glyphicon-arrow-up"></span></button>
+                    <button type="button" data-bind="click: changeOrderCallback($parent, 1), enable: $index() < $parent.answers().length - 1"><span class="glyphicon glyphicon-arrow-down"></span></button>
+                    |
+                    <input type="checkbox" /> <input type="text" data-bind="textInput: text" />
+                </li>
+            </ul>
+
+            <p data-bind="visible: type() == QuestionEditor.QuestionType.Text">
+                <textarea data-bind="enable: false">Enter your answer here</textarea>
+            </p>
+        </div>
+    </div>
+</div>
