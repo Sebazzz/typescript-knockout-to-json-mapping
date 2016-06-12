@@ -56,6 +56,11 @@ module QuestionEditor {
 
             this.questions.sort((x: Question, y: Question) => x.order() - y.order());
         }
+
+        constructor() {
+            // bind "this"
+            this.deleteQuestion = this.deleteQuestion.bind(this);
+        }
     }
 
     QuestionEditor.initialize();
