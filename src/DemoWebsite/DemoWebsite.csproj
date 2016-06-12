@@ -157,15 +157,6 @@
     <Content Include="bower_components\reflect-metadata\spec\biblio.json" />
     <Content Include="bower_components\reflect-metadata\tsconfig.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\Demo\Mapper.js">
-      <DependentUpon>Mapper.ts</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Demo\Question - Copy.js">
-      <DependentUpon>Models.ts</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Demo\Question.js">
-      <DependentUpon>QuestionEditor.ts</DependentUpon>
-    </Content>
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

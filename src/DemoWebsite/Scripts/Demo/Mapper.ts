@@ -98,7 +98,7 @@ module TsMapping {
                 var item = obj[key],
                     itemIsObservable = ko.isObservable(item),
                     itemIsWritableObservable = ko.isWriteableObservable(item),
-                    itemIsObservableArray = itemIsObservable && MapUtils.isArray(item.peek());
+                    itemHasArrayType = itemIsObservable && MapUtils.isArray(item.peek()) || MapUtils.isArray(item);
 
                 if (itemIsObservable && !itemIsWritableObservable) {
                     // ignore this prop
@@ -114,7 +114,7 @@ module TsMapping {
                     const designType = MapUtils.getDesignType(obj, key);
                     const metadata = MapUtils.getJsonProperty(obj, key);
 
-                    if (itemIsObservableArray) {
+                    if (itemHasArrayType) {
                         if (metadata.clazzFactory || MapUtils.isPrimitive(designType)) {
                             if (innerJson && MapUtils.isArray(innerJson)) {
                                 return innerJson.map(
