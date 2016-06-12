@@ -114,7 +114,7 @@ module TsMapping {
                     const designType = MapUtils.getDesignType(obj, key);
                     const metadata = MapUtils.getJsonProperty(obj, key);
 
-                    if (itemHasArrayType) {
+                    if (itemHasArrayType || MapUtils.isArray(designType)) {
                         if (metadata.clazzFactory || MapUtils.isPrimitive(designType)) {
                             if (innerJson && MapUtils.isArray(innerJson)) {
                                 return innerJson.map(
